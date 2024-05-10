@@ -5,7 +5,7 @@ namespace TestB_s27776_17c.models.dto_s;
 public class BookDTO
 {
     [Required]
-    public int PK { get; set; }
+    public int PKBook { get; set; }
     [Required]
     public string Title { get; set; }
 }
@@ -13,9 +13,9 @@ public class BookDTO
 public class GenresDTO
 {
     [Required]
-    public int PK { get; set; }
+    public int PKGenre { get; set; }
     [Required]
-    public string nam { get; set; }
+    public string name { get; set; }
 }
 
 public class PublishingHousesDTO
@@ -30,16 +30,14 @@ public class PublishingHousesDTO
     public string owner_last_nam { get; set; }
 
 }
-
-
 public class AuthorsDTO
 {
     [Required]
-    public int PK { get; set; }
+    public int PKAuthor { get; set; }
     [Required]
-    public string? first_na { get; set; }
+    public string? first_name{ get; set; }
     [Required]
-    public string last_na { get; set; }
+    public string last_name { get; set; }
 
 }
 
