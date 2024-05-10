@@ -10,6 +10,22 @@ public class BookDTO
     public string Title { get; set; }
 }
 
+public class Book_AuthorsDTP
+{
+    [Required]
+    public BookDTO PKBook { get; set; }
+    [Required]
+    public AuthorsDTO PKAuthors { get; set; }
+}
+
+public class Book_GenresDTP
+{
+    [Required]
+    public BookDTO PKBook { get; set; }
+    [Required]
+    public GenresDTO PKGenres { get; set; }
+}
+
 public class GenresDTO
 {
     [Required]

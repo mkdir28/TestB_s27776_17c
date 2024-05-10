@@ -62,9 +62,9 @@ public class BookRepository(IConfiguration configuration): IBookRepository
 
     public async Task<BookDTO> GetBook(int id)
     {
-        var query = "Select BookDTO.PKBook as id, BookDTO.Title as title, authors.first_name as firstName," +
-                    "authors.last_name as lastName, GenresDTO.name From [BookDTO] book JOIN authors a on a.PKAuthor = book.PKAuthor " +
-                    "Join GenresDTO genres on genres.PKGenre = book.PKGenre WHERE book.BookDTO = @Id"
+        var query = "Select books.PK as id, books.title as title, authors.first_name as firstName," +
+                    "authors.last_name as lastName, genres.name From [books] book JOIN books_authors a on a.books_authors_pk = book.books_authors_pk " +
+                    "Join books_genres g on g.books_genres_pk = book.books_genres_pk WHERE book.books = @Id";
         //open connection
         await using SqlConnection connection = new SqlConnection(configuration.GetConnectionString("Docker"));
         await connection.OpenAsync();
@@ -87,11 +87,12 @@ public class BookRepository(IConfiguration configuration): IBookRepository
         var nameGener = reader.GetOrdinal("");
         
         BookDTO book = null;
+        
         while (await reader.ReadAsync())
         {
             if (book is not null)
             {
-                book.authors.Add(new AuthorsDTO()
+                book.Book_AuthorsDTP.Add(new AuthorsDTO()
                 {
                     
                 });
@@ -103,12 +104,14 @@ public class BookRepository(IConfiguration configuration): IBookRepository
             {
                 book = new BookDTO()
                 {
-                    
-                }
+
+                };
             }
             
 
         }
+        if (book is null) throw new Exception();
+        return book;
     }
 
 
